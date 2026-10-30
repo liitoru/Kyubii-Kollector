@@ -52,6 +52,13 @@ _subresources={
 "use_external/fallback_path": "res://Models/Dev/MAin/Mats/WolfMat.tres",
 "use_external/path": "uid://bvs3grn1u28fh"
 }
+},
+"nodes": {
+"PATH:AnimationPlayer": {
+"import_tracks/position": 0,
+"import_tracks/rotation": 0,
+"import_tracks/scale": 0
+}
 }
 }
 gltf/naming_version=2

@@ -1,7 +1,10 @@
 extends CharacterBody3D
 
 ##Movement
-const MAX_SPEED := 2.0
+const MAX_SPEED := 5.0
+const WALK_SPEED := 1.0
+const WALK_BLEND := 0.5
+const RUN_BLEND := 1.0
 const GROUND_ACCEL := 30.0
 const GROUND_FRICTION := 38.0
 const AIR_ACCEL := 10.0
@@ -16,6 +19,7 @@ const JUMP_CUT := 0.45
 const FALL_GRAVITY_MULT := 1.6
 
 const SNAP_FALL_GRAVITY_MULT := 2.2
+const SNAP_RAMP_TIME := 0.3
 const TERMINAL_VELOCITY := -25.0
 const COYOTE_TIME := 0.1
 const JUMP_BUFFER := 0.12
@@ -26,10 +30,14 @@ const COMBO_NAMES := ["Paw swipe 1", "Paw swipe 2", "Tail swipe"]
 const COMBO_LUNGE := 1.5                  # small step forward on each hit
 const ATTACK_FRICTION := 8.0              # how fast the lunge fades
 
+const COMBO_ANIM_NODES := ["Attack1", "Attack2", "TailSpin"]
+const AIR_SPIN_ANIM_NODE := "AirTailSpin"
+const ATTACK_ANIM_NODES := ["Attack1", "Attack2", "TailSpin", "AirTailSpin"]
 
 const AIR_SPIN_TIME := 0.5
+const AIR_SPIN_HOVER_VELOCITY := 0.5
+const AIR_SPIN_MAX_FALL := -5.0
 const BOUNCE_VELOCITY := 5.0              # launch when the spin hits an enemy
-const SPIN_SPEED := TAU * 3.0             # placeholder until anim exists
 
 ## AIRDASHING
 const DASH_SPEED := 7.0
@@ -89,11 +97,10 @@ var combo_step := 0
 var combo_queued := false
 var air_dash_used := false
 var snappy_fall := false
+var snap_timer := 0.0
 var dash_dir := Vector3.FORWARD
 var is_invincible := false   # TODO: hook up to the damage system (true during airdash = air dodge)
 var hit_targets: Array = []  # enemies already hit by the current swing
-var spin_angle := 0.0
-var main_base_yaw := 0.0
 var form: Form = Form.BASE
 
 @onready var debuglabel: Label3D = $DEBUGLABEL
@@ -114,7 +121,6 @@ func _ready() -> void:
 	camera_arm.top_level = true
 	camera_arm.add_excluded_object(self)
 	cam_y = global_position.y + CAM_HEIGHT
-	main_base_yaw = main_character.rotation.y
 
 	if attack_hitbox:
 		attack_hitbox.monitoring = false
@@ -157,13 +163,16 @@ func _physics_process(delta: float) -> void:
 	update_look_target(delta)
 
 	_process_hits()
-	_update_spin_visual(delta)
 	_update_debug(is_on_floor())
 
 
 
 func _pressed(action: StringName) -> bool:
 	return InputMap.has_action(action) and Input.is_action_just_pressed(action)
+
+
+func _held(action: StringName) -> bool:
+	return InputMap.has_action(action) and Input.is_action_pressed(action)
 
 
 # Movement input in world space (relative to the camera yaw)
@@ -249,12 +258,31 @@ func _tick_state(grounded: bool, delta: float) -> void:
 
 
 func _set_state(new_state: State, duration := 0.0) -> void:
+	var cut_short := (state == State.GROUND_COMBO or state == State.AIR_SPIN) \
+		and state_timer > 0.0 and new_state != State.GROUND_COMBO
+	if cut_short:
+		_abort_attack_anims()
+
 	state = new_state
 	state_timer = duration
 	hit_targets.clear()
 	is_invincible = new_state == State.AIR_DASH
 	if attack_hitbox:
 		attack_hitbox.set_deferred("monitoring", new_state == State.GROUND_COMBO or new_state == State.AIR_SPIN)
+
+
+func _fire_oneshot(node_name: String) -> void:
+	character_anim_tree.set("parameters/%s/request" % node_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+
+func _abort_attack_anims() -> void:
+	for node_name in ATTACK_ANIM_NODES:
+		character_anim_tree.set("parameters/%s/request" % node_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+
+
+func _start_snap_fall() -> void:
+	snappy_fall = true
+	snap_timer = 0.0
 
 
 func _start_combo_step(step: int) -> void:
@@ -269,15 +297,14 @@ func _start_combo_step(step: int) -> void:
 	var f := _facing_vector()
 	velocity.x = f.x * COMBO_LUNGE
 	velocity.z = f.z * COMBO_LUNGE
-	# TODO: play the matching attack animation (paw 1, paw 2, tail swipe) on the anim tree
+	_fire_oneshot(COMBO_ANIM_NODES[step])
 
 
 func _start_air_spin() -> void:
-	velocity.y = minf(velocity.y, 0.0)
-	snappy_fall = true
-	spin_angle = 0.0
+	velocity.y = minf(velocity.y, AIR_SPIN_HOVER_VELOCITY)
+	_start_snap_fall()
 	_set_state(State.AIR_SPIN, AIR_SPIN_TIME)
-	# TODO: play spin animation (the code spins the model for now)
+	_fire_oneshot(AIR_SPIN_ANIM_NODE)
 
 
 func _bounce_off_enemy() -> void:
@@ -303,7 +330,7 @@ func _end_air_dash() -> void:
 		h = h.normalized() * DASH_EXIT_SPEED
 	velocity.x = h.x
 	velocity.z = h.z
-	snappy_fall = true
+	_start_snap_fall()
 	_set_state(State.NORMAL)
 
 
@@ -329,17 +356,6 @@ func _process_hits() -> void:
 			break
 
 
-# Placeholder visual spin for the air attack
-#TODO: REALLY ADD THE ANIMATION!!
-func _update_spin_visual(delta: float) -> void:
-	if state == State.AIR_SPIN:
-		spin_angle += SPIN_SPEED * delta
-		main_character.rotation.y = main_base_yaw + spin_angle
-	elif spin_angle != 0.0:
-		spin_angle = 0.0
-		main_character.rotation.y = main_base_yaw
-
-
 func _cycle_form() -> void:
 	var next := (int(form) + 1) % Form.size()
 	_apply_form(next as Form)
@@ -358,11 +374,17 @@ func _apply_gravity(grounded: bool, delta: float) -> void:
 		return  # dash is flat, no gravity
 	var g := get_gravity() * delta
 	if snappy_fall:
-		g *= SNAP_FALL_GRAVITY_MULT
+		snap_timer += delta
+		var mult := lerpf(1.0, SNAP_FALL_GRAVITY_MULT, clampf(snap_timer / SNAP_RAMP_TIME, 0.0, 1.0))
+		if velocity.y < 0.0:
+			mult = maxf(mult, FALL_GRAVITY_MULT)
+		g *= mult
 	elif velocity.y < 0.0:
 		g *= FALL_GRAVITY_MULT
 	velocity += g
 	velocity.y = maxf(velocity.y, TERMINAL_VELOCITY)
+	if state == State.AIR_SPIN:
+		velocity.y = maxf(velocity.y, AIR_SPIN_MAX_FALL)
 
 
 func _handle_jump(grounded: bool, delta: float) -> void:
@@ -384,7 +406,7 @@ func _handle_jump(grounded: bool, delta: float) -> void:
 		elif jumps_used < MAX_JUMPS:
 			_do_jump(DOUBLE_JUMP_VELOCITY)
 			jumps_used += 1
-			snappy_fall = true  
+			_start_snap_fall()
 
 	if Input.is_action_just_released("ui_accept") and velocity.y > 0.0:
 		velocity.y *= JUMP_CUT
@@ -413,8 +435,10 @@ func _handle_horizontal_movement(grounded: bool, delta: float) -> Vector3:
 	if attacking_on_ground:
 		direction = Vector3.ZERO
 
+	var top_speed := MAX_SPEED if _held("IN_Run") else WALK_SPEED
+
 	var h_vel := Vector3(velocity.x, 0, velocity.z)
-	var target_vel := direction * MAX_SPEED
+	var target_vel := direction.normalized() * top_speed
 
 	var rate: float
 	if attacking_on_ground:
@@ -447,8 +471,17 @@ func align_with_surface(normal: Vector3, delta: float) -> void:
 	Model.global_transform.basis = Basis(new_q)
 
 
+func _speed_to_blend(speed: float) -> float:
+	var x: float
+	if speed <= WALK_SPEED:
+		x = remap(speed, 0.0, WALK_SPEED, 0.0, WALK_BLEND)
+	else:
+		x = remap(speed, WALK_SPEED, MAX_SPEED, WALK_BLEND, RUN_BLEND)
+	return clampf(x, 0.0, RUN_BLEND)
+
+
 func _update_animation(h_vel: Vector3, grounded: bool, delta: float) -> void:
-	var walk_target := clampf(h_vel.length() / MAX_SPEED, 0.0, 1.0)
+	var walk_target := _speed_to_blend(h_vel.length())
 	DampedWalking = move_toward(DampedWalking, walk_target, WALK_BLEND_SPEED * delta)
 	DampedAnimF = move_toward(DampedAnimF, 1.0 if grounded else -1.0, AIR_BLEND_SPEED * delta)
 	character_anim_tree.set("parameters/Movement/blend_position", Vector2(DampedWalking, DampedAnimF))
