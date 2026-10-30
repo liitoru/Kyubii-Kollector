@@ -1,0 +1,31 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bvs3grn1u28fh"]
+
+[ext_resource type="Texture2D" uid="uid://bc8tnpa28j5f6" path="res://Models/Dev/MAin/MainCharacter_Color.png" id="1_3xu3p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dchrc"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.015
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+stencil_reference = 50
+metadata/_stencil_owned = true
+
+[resource]
+resource_name = "Material.001"
+next_pass = SubResource("StandardMaterial3D_dchrc")
+transparency = 4
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_texture = ExtResource("1_3xu3p")
+texture_filter = 1
+texture_repeat = false
+stencil_mode = 1
+stencil_flags = 2
+stencil_reference = 50
+stencil_outline_thickness = 0.015

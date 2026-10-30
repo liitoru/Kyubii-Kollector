@@ -1,0 +1,27 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dtmf6sikd5p66"]
+
+[ext_resource type="Texture2D" uid="uid://bp8u2yddrikrx" path="res://Models/Haruto/Material_BaseColor.png" id="1_vecmk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rguq"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.005
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+stencil_reference = 2
+metadata/_stencil_owned = true
+
+[resource]
+resource_name = "Material"
+next_pass = SubResource("StandardMaterial3D_3rguq")
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("1_vecmk")
+stencil_mode = 1
+stencil_flags = 2
+stencil_reference = 2
+stencil_outline_thickness = 0.005
