@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxq3t6a62isgm"
+path="res://.godot/imported/Looney TV.wav-608a26083d9ebcea6b88c2eb60cd833e.sample"
+
+[deps]
+
+source_file="res://Sounds/SFX/Sound FX Starter Pack Vol. 1/Horror/Looney TV.wav"
+dest_files=["res://.godot/imported/Looney TV.wav-608a26083d9ebcea6b88c2eb60cd833e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

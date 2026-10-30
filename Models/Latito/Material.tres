@@ -1,0 +1,36 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ir2sx56qmkiy"]
+
+[ext_resource type="Texture2D" uid="uid://cly0virg31bn8" path="res://Models/Latito/LatitoV0.png" id="1_4vy2g"]
+[ext_resource type="Shader" uid="uid://bkbadtqo4lwbg" path="res://Shader/MatCap.gdshader" id="2_fa7gq"]
+[ext_resource type="Texture2D" uid="uid://cbdb12rlltjxt" path="res://Models/Latito/Latito3.png" id="3_fa7gq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lf5il"]
+render_priority = 0
+shader = ExtResource("2_fa7gq")
+shader_parameter/matcap = ExtResource("3_fa7gq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnhqc"]
+render_priority = 1
+next_pass = SubResource("ShaderMaterial_lf5il")
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.002
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+stencil_reference = 20
+metadata/_stencil_owned = true
+
+[resource]
+resource_name = "Material"
+next_pass = SubResource("StandardMaterial3D_gnhqc")
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("1_4vy2g")
+texture_filter = 0
+stencil_mode = 1
+stencil_flags = 2
+stencil_reference = 20
+stencil_outline_thickness = 0.002

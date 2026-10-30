@@ -2761,25 +2761,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -
 [node name="PlayerT" parent="CharacterPivot/MainCharacter" index="0" unique_id=884827676]
 transform = Transform3D(0.20299995, 0, 0, 0, 0.20299995, 0, 0, 0, 0.20299995, 0, 0.04, 0)
 
-[node name="Skeleton3D" parent="CharacterPivot/MainCharacter/PlayerT" index="0" unique_id=230976689]
-bones/1/position = Vector3(-3.676086e-15, 0.91797423, 1.9177611)
-bones/1/rotation = Quaternion(0.99788356, -0.00037146895, -0.00083793484, -0.06501984)
-bones/3/rotation = Quaternion(-0.4063314, -0.59805924, 0.6907852, -0.005976478)
-bones/11/rotation = Quaternion(0.4062794, -0.5980499, 0.69082355, 0.0060242973)
-bones/18/rotation = Quaternion(0.9886152, -0.068933375, 0.047240622, -0.12512642)
-bones/19/rotation = Quaternion(0.24132761, 0.06994309, 0.05338075, 0.9664469)
-bones/20/rotation = Quaternion(0.3273448, 0.08582009, 0.01163416, 0.9409277)
-bones/21/rotation = Quaternion(0.27664444, 0.08069513, -0.035001658, 0.95693845)
-bones/28/rotation = Quaternion(0.5389307, 0.10788056, -0.022887593, 0.8350998)
-bones/30/rotation = Quaternion(-0.176942, -0.0002399997, -0.045779396, 0.9831561)
-bones/35/rotation = Quaternion(0.61690676, -0.057729535, 0.107039385, 0.77758336)
-bones/36/rotation = Quaternion(0.53916377, -0.10751374, 0.023137856, 0.8349898)
-bones/38/rotation = Quaternion(0.16889973, 0.85285187, 0.48749596, 0.08040213)
-bones/43/rotation = Quaternion(0.6170084, 0.05804486, -0.107167535, 0.77746165)
-bones/45/rotation = Quaternion(-0.1634861, 0.003107594, -0.002307832, 0.98653805)
-bones/46/rotation = Quaternion(0.04723579, 0.00021168856, -7.5375516e-05, 0.9988838)
-
-[node name="TailPhys" type="SpringBoneSimulator3D" parent="CharacterPivot/MainCharacter/PlayerT/Skeleton3D" index="1" unique_id=1443636022]
+[node name="TailPhys" type="SpringBoneSimulator3D" parent="CharacterPivot/MainCharacter/PlayerT/Skeleton3D" parent_id_path=PackedInt32Array(1859335532, 230976689) index="1" unique_id=1443636022]
 setting_count = 3
 settings/0/root_bone_name = "DEF-spine.003"
 settings/0/root_bone = 18
@@ -2798,6 +2780,14 @@ settings/0/drag/damping_curve = null
 settings/0/gravity/value = 0.5
 settings/0/gravity/damping_curve = null
 settings/0/gravity/direction = Vector3(0, -1, 0)
+settings/0/joints/0/bone_name = "DEF-spine.003"
+settings/0/joints/0/bone = 18
+settings/0/joints/1/bone_name = "DEF-spine.002"
+settings/0/joints/1/bone = 19
+settings/0/joints/2/bone_name = "DEF-spine.001"
+settings/0/joints/2/bone = 20
+settings/0/joints/3/bone_name = "DEF-spine"
+settings/0/joints/3/bone = 21
 settings/0/enable_all_child_collisions = true
 settings/0/exclude_collision_count = 0
 settings/1/root_bone_name = "Ear.L"
@@ -2819,6 +2809,10 @@ settings/1/drag/damping_curve = null
 settings/1/gravity/value = 0.1
 settings/1/gravity/damping_curve = null
 settings/1/gravity/direction = Vector3(0, -1, 0)
+settings/1/joints/0/bone_name = "Ear.L"
+settings/1/joints/0/bone = 47
+settings/1/joints/1/bone_name = "Ear.L.001"
+settings/1/joints/1/bone = 48
 settings/1/enable_all_child_collisions = true
 settings/1/exclude_collision_count = 0
 settings/2/root_bone_name = "Ear.R"
@@ -2838,10 +2832,14 @@ settings/2/drag/damping_curve = null
 settings/2/gravity/value = 0.1
 settings/2/gravity/damping_curve = null
 settings/2/gravity/direction = Vector3(0, -1, 0)
+settings/2/joints/0/bone_name = "Ear.R"
+settings/2/joints/0/bone = 49
+settings/2/joints/1/bone_name = "Ear.R.001"
+settings/2/joints/1/bone = 50
 settings/2/enable_all_child_collisions = true
 settings/2/exclude_collision_count = 0
 
-[node name="LookAtModifier3D" type="LookAtModifier3D" parent="CharacterPivot/MainCharacter/PlayerT/Skeleton3D" index="2" unique_id=314105926]
+[node name="LookAtModifier3D" type="LookAtModifier3D" parent="CharacterPivot/MainCharacter/PlayerT/Skeleton3D" parent_id_path=PackedInt32Array(1859335532, 230976689) index="2" unique_id=314105926]
 target_node = NodePath("../../../../../CameraArm/Camera3D")
 bone_name = "DEF-spine.010"
 bone = 45
@@ -2878,5 +2876,10 @@ spring_length = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="CameraArm" unique_id=1760362173]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="DEBUGLABEL" type="Label3D" parent="." unique_id=1425494622]
+transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0.9213211, 0)
+billboard = 1
+text = "TEST"
 
 [editable path="CharacterPivot/MainCharacter"]

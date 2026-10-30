@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://drgmcjqnhmieh"
+path="res://.godot/imported/Metallic Trembling.wav-5817924f020d136e0aa2714cb6ff329b.sample"
+
+[deps]
+
+source_file="res://Sounds/SFX/Sound FX Starter Pack Vol. 1/Horror/Metallic Trembling.wav"
+dest_files=["res://.godot/imported/Metallic Trembling.wav-5817924f020d136e0aa2714cb6ff329b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

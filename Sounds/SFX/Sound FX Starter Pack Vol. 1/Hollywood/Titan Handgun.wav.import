@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dp4l0eesv8j4g"
+path="res://.godot/imported/Titan Handgun.wav-3bacfa18cef4c6a63a3bb10ce63edbb1.sample"
+
+[deps]
+
+source_file="res://Sounds/SFX/Sound FX Starter Pack Vol. 1/Hollywood/Titan Handgun.wav"
+dest_files=["res://.godot/imported/Titan Handgun.wav-3bacfa18cef4c6a63a3bb10ce63edbb1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

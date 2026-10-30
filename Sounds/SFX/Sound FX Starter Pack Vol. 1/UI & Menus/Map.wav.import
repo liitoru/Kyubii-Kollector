@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://tojnawfy0bor"
+path="res://.godot/imported/Map.wav-fb5c1b5bc7ef2c934ecdf776963aa39e.sample"
+
+[deps]
+
+source_file="res://Sounds/SFX/Sound FX Starter Pack Vol. 1/UI & Menus/Map.wav"
+dest_files=["res://.godot/imported/Map.wav-fb5c1b5bc7ef2c934ecdf776963aa39e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ba138rwb7aph4"
+path="res://.godot/imported/Dreamscape Loop.wav-7652abdbc7c28002a309251c994771b6.sample"
+
+[deps]
+
+source_file="res://Sounds/SFX/Sound FX Starter Pack Vol. 1/Environment/Dreamscape Loop.wav"
+dest_files=["res://.godot/imported/Dreamscape Loop.wav-7652abdbc7c28002a309251c994771b6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

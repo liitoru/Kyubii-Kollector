@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://do31lquwky8ip"
+path="res://.godot/imported/Hail Storm Loop.wav-a7085c8b44fe6d27f37e67682ae903ef.sample"
+
+[deps]
+
+source_file="res://Sounds/SFX/Sound FX Starter Pack Vol. 1/Environment/Hail Storm Loop.wav"
+dest_files=["res://.godot/imported/Hail Storm Loop.wav-a7085c8b44fe6d27f37e67682ae903ef.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
