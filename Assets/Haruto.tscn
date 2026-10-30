@@ -56,7 +56,7 @@ triangles = PackedInt32Array(0, 1, 2, 1, 2, 3)
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_h86mf"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dq2n5"]
-graph_offset = Vector2(-1109.6646, -126.09032)
+graph_offset = Vector2(314.74927, 1.8424072)
 nodes/output/position = Vector2(1680, 80)
 nodes/Movement/node = SubResource("AnimationNodeBlendSpace2D_rda8d")
 nodes/Movement/position = Vector2(-520, 140)
@@ -84,7 +84,7 @@ node_connections = [&"output", 0, &"AirTailSpin", &"Defeated", 0, &"Movement", &
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dq2n5"]
 radius = 0.2
-height = 0.9211426
+height = 0.73254395
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_5xygc"]
 slide_on_slope = true
@@ -103,30 +103,31 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -
 transform = Transform3D(0.20299995, 0, 0, 0, 0.20299995, 0, 0, 0, 0.20299995, 0, 0.045416787, 0)
 
 [node name="Skeleton3D" parent="CharacterPivot/MainCharacter/PlayerT" index="0" unique_id=1475786567]
-bones/1/position = Vector3(-5.1194666e-16, 0.91797423, 1.9508727)
+bones/1/position = Vector3(-2.7373267e-15, 0.91797423, 1.927585)
 bones/3/position = Vector3(-0.2132352, 0.3925719, 0.0024503618)
-bones/3/rotation = Quaternion(-0.4062552, -0.5888042, 0.6987566, 0.0023769273)
+bones/3/rotation = Quaternion(-0.4063101, -0.5941647, 0.6941718, -0.0024471267)
 bones/11/position = Vector3(0.21323533, 0.39257172, 0.0024501681)
-bones/19/rotation = Quaternion(0.22569832, -0.030007083, -0.035152495, 0.97310024)
-bones/20/rotation = Quaternion(0.31554955, -0.051369894, -0.01493826, 0.9473999)
-bones/21/rotation = Quaternion(0.25550944, -0.03398075, 7.329695e-05, 0.96620923)
+bones/19/rotation = Quaternion(0.21583565, 0.03534331, 0.009236653, 0.97574615)
+bones/20/rotation = Quaternion(0.29617226, 0.018475581, -0.01452574, 0.9548454)
+bones/21/rotation = Quaternion(0.25756997, 0.03633715, -0.028405197, 0.96515834)
 bones/28/position = Vector3(0.28629884, 0.16559148, 0.1170253)
-bones/28/rotation = Quaternion(0.6074666, 0.1092995, -0.013823383, 0.78666824)
+bones/28/rotation = Quaternion(0.56701744, 0.10854506, -0.019253794, 0.8162956)
 bones/30/position = Vector3(7.450581e-09, 0.15909505, -3.7252903e-08)
-bones/30/rotation = Quaternion(-0.045406718, -6.167639e-05, -0.0117481565, 0.9988996)
+bones/30/rotation = Quaternion(-0.12444214, -0.00016882553, -0.032196462, 0.99170434)
 bones/35/position = Vector3(-0.015502877, 0.51152426, 0.07113022)
-bones/35/rotation = Quaternion(0.5655189, -0.065907165, 0.1047662, 0.8153948)
+bones/35/rotation = Quaternion(0.5965857, -0.061040975, 0.106180176, 0.79314893)
 bones/36/position = Vector3(-0.28629938, 0.16559142, 0.117023796)
-bones/36/rotation = Quaternion(0.60747945, -0.10920599, 0.013894621, 0.7866701)
+bones/36/rotation = Quaternion(0.5670529, -0.10828489, 0.019446354, 0.81630105)
 bones/38/position = Vector3(0.033442628, 0.57400835, 0.103744015)
-bones/38/rotation = Quaternion(0.14897354, 0.915131, 0.3673231, 0.07359355)
+bones/38/rotation = Quaternion(0.16125043, 0.87988466, 0.44016165, 0.07783978)
 bones/43/position = Vector3(0.015502693, 0.5115241, 0.0711305)
-bones/43/rotation = Quaternion(0.56552196, 0.06599202, -0.10479766, 0.8153819)
-bones/45/rotation = Quaternion(-0.1662687, 0.0012255177, -0.0013849803, 0.98607874)
-bones/46/rotation = Quaternion(0.059162196, -0.00011778285, -0.00069075567, 0.99824816)
+bones/43/rotation = Quaternion(0.59659296, 0.061272737, -0.10626723, 0.793114)
+bones/45/rotation = Quaternion(-0.15383017, 0.0033671518, -0.0038043319, 0.98808426)
+bones/46/rotation = Quaternion(0.05429791, -6.918532e-05, -0.00042384368, 0.9985247)
 
 [node name="TailPhys" type="SpringBoneSimulator3D" parent="CharacterPivot/MainCharacter/PlayerT/Skeleton3D" index="0" unique_id=1443636022]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19704439, 0)
+influence = 0.752
 setting_count = 3
 settings/0/root_bone_name = "DEF-spine.003"
 settings/0/root_bone = 18
@@ -252,7 +253,7 @@ hit_back_faces = false
 debug_shape_custom_color = Color(0.81724805, 0, 0.1565935, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1327461219]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0013856888, 0.4431486, 6.222725e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0013856888, 0.3488493, 6.222725e-05)
 shape = SubResource("CapsuleShape3D_dq2n5")
 
 [node name="CameraArm" type="SpringArm3D" parent="." unique_id=1042649712]
