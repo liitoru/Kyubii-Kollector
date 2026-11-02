@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dgm8otrqkcn7v"]
+
+[ext_resource type="Texture2D" uid="uid://pnkgwwlh7v1g" path="res://Models/Haruto/textures/fop textures.png" id="1_vrb15"]
+
+[resource]
+resource_name = "Body"
+transparency = 4
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("1_vrb15")
+texture_filter = 0
+stencil_mode = 3
+stencil_outline_thickness = 0.005

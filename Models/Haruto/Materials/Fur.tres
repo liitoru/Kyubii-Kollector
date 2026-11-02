@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c0ryoh0lc6d2d"]
+
+[ext_resource type="Texture2D" uid="uid://pnkgwwlh7v1g" path="res://Models/Haruto/textures/fop textures.png" id="1_tgbog"]
+
+[resource]
+resource_name = "Fur"
+transparency = 4
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("1_tgbog")
+texture_filter = 0
+stencil_mode = 3

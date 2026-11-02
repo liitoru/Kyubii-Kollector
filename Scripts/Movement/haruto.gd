@@ -77,7 +77,7 @@ enum Form { BASE }
 
 var Sensitivity := 0.003
 var facing_yaw := 0.0
-var ground_offset := -0.04
+var ground_offset := 0.01
 
 var jumps_used := 0
 var coyote_timer := 0.0
@@ -112,7 +112,6 @@ var form: Form = Form.BASE
 @onready var character_anim_tree: AnimationTree = $CharacterPivot/MainCharacter/CharacterAnimTree
 @onready var positon_ray_cast: RayCast3D = $CharacterPivot/PositonRayCast
 # TODO: add an Area3D named AttackHitbox under CharacterPivot (in front of the character).
-# Until it exists attacks still play but won't hit anything.
 @onready var attack_hitbox: Area3D = get_node_or_null("CharacterPivot/AttackHitbox") as Area3D
 
 
@@ -144,7 +143,6 @@ func _physics_process(delta: float) -> void:
 
 	var grounded := is_on_floor()
 	if grounded:
-		# Landing refills everything
 		air_dash_used = false
 		snappy_fall = false
 
@@ -175,7 +173,7 @@ func _held(action: StringName) -> bool:
 	return InputMap.has_action(action) and Input.is_action_pressed(action)
 
 
-# Movement input in world space (relative to the camera yaw)
+
 func _input_direction() -> Vector3:
 	var input_dir := Input.get_vector("IN_Left", "IN_Right", "IN_Forward", "IN_Backward")
 	var yaw_basis := Basis(Vector3.UP, camera_arm.rotation.y)
@@ -186,9 +184,7 @@ func _facing_vector() -> Vector3:
 	return Vector3(-sin(facing_yaw), 0, -cos(facing_yaw))
 
 
-# ---------------------------------------------------------------------------
 # Camera
-# ---------------------------------------------------------------------------
 
 func _rotate_camera(relative: Vector2) -> void:
 	camera_arm.rotation.y -= relative.x * Sensitivity
@@ -309,8 +305,8 @@ func _start_air_spin() -> void:
 
 func _bounce_off_enemy() -> void:
 	velocity.y = BOUNCE_VELOCITY
-	jumps_used = 1          # refund the double jump
-	air_dash_used = false   # refund the airdash
+	jumps_used = 1        
+	air_dash_used = false 
 	snappy_fall = false
 	_set_state(State.NORMAL)
 
@@ -391,7 +387,11 @@ func _handle_jump(grounded: bool, delta: float) -> void:
 
 	coyote_timer = COYOTE_TIME if grounded else coyote_timer - delta
 	jump_buffer_timer -= delta
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("IN_Jump"):
+		if grounded and jumps_used < MAX_JUMPS:
+			_fire_oneshot("Jump")
+		elif not grounded and jumps_used < MAX_JUMPS:
+			_fire_oneshot("DoubleJump")
 		jump_buffer_timer = JUMP_BUFFER
 
 	if grounded and velocity.y <= 0.0:

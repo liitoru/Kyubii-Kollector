@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://tqvvnhwklnp7"]
+
+[ext_resource type="Texture2D" uid="uid://pnkgwwlh7v1g" path="res://Models/Haruto/textures/fop textures.png" id="1_qjptt"]
+
+[resource]
+resource_name = "Mouth"
+transparency = 4
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("1_qjptt")
+texture_filter = 0
