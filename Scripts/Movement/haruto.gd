@@ -11,6 +11,12 @@ const AIR_ACCEL := 10.0
 const AIR_FRICTION := 1.5
 const TURN_SHARPNESS := 12.0
 
+##Air tilt
+const AIR_PITCH_UP := 90.0        # degrees, nose up when rising
+const AIR_PITCH_DOWN := 45.0      # degrees, nose down when falling
+const AIR_PITCH_SPEED := 8.0      # how fast the tilt follows
+const AIR_PITCH_VEL_RANGE := 8.0  # vertical speed that gives the full tilt
+
 ##Jumping and gravity
 const MAX_JUMPS := 2
 const JUMP_VELOCITY := 3.5
@@ -92,6 +98,7 @@ var DampedWalking := 0.0
 
 var cam_y := 0.0
 var look_dir := Vector3.FORWARD
+var air_pitch := 0.0
 
 var blink_index := -1
 
@@ -489,7 +496,14 @@ func _update_facing(h_vel: Vector3, delta: float) -> void:
 
 func align_with_surface(normal: Vector3, delta: float) -> void:
 	var up := normal.normalized()
-	var target_basis := Basis(Quaternion(Vector3.UP, up)) * Basis(Vector3.UP, facing_yaw)
+
+	var target_pitch := 0.0
+	if not is_on_floor():
+		var t := clampf(velocity.y / AIR_PITCH_VEL_RANGE, -1.0, 1.0)
+		target_pitch = deg_to_rad(AIR_PITCH_UP) * t if t > 0.0 else deg_to_rad(AIR_PITCH_DOWN) * t
+	air_pitch = lerpf(air_pitch, target_pitch, 1.0 - exp(-AIR_PITCH_SPEED * delta))
+
+	var target_basis := Basis(Quaternion(Vector3.UP, up)) * Basis(Vector3.UP, facing_yaw) * Basis(Vector3.RIGHT, air_pitch)
 	var current_q := Model.global_transform.basis.get_rotation_quaternion()
 	var target_q := target_basis.get_rotation_quaternion()
 	var new_q := current_q.slerp(target_q, clampf(ALIGN_SPEED * delta, 0.0, 1.0))
