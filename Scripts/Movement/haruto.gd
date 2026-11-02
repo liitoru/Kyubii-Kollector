@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 ##Movement
 const MAX_SPEED := 5.0
-const WALK_SPEED := 1.0
+const WALK_SPEED := 2.5
 const WALK_BLEND := 0.5
 const RUN_BLEND := 1.0
 const GROUND_ACCEL := 30.0
@@ -42,10 +42,12 @@ const AIR_SPIN_MAX_FALL := -5.0
 const BOUNCE_VELOCITY := 5.0              # launch when the spin hits an enemy
 
 ## AIRDASHING
-const DASH_SPEED := 7.0
-const DASH_TIME := 0.18
-const DASH_EXIT_SPEED := 2.5              # speed kept after the dash ends
-
+const DASH_SPEED := 9.0
+const DASH_TIME := 0.22
+const DASH_EXIT_SPEED := 6.0              # speed kept after the dash ends
+const DASH_CARRY_TIME := 0.4              # momentum protection after a dash
+const DASH_CARRY_FRICTION := 4.0          # gentle slowdown during that window
+ 
 const ENEMY_GROUP := "enemy"
 
 ##Camera stuff
@@ -101,6 +103,7 @@ var chain_step := -1
 var chain_timer := 0.0
 var air_dash_used := false
 var dash_entry_speed := 0.0
+var dash_carry := 0.0
 var snappy_fall := false
 var snap_timer := 0.0
 var dash_dir := Vector3.FORWARD
@@ -341,6 +344,7 @@ func _end_air_dash() -> void:
 	var exit_speed := maxf(DASH_EXIT_SPEED, dash_entry_speed)
 	velocity.x = dash_dir.x * exit_speed
 	velocity.z = dash_dir.z * exit_speed
+	dash_carry = DASH_CARRY_TIME
 	_start_snap_fall()
 	_set_state(State.NORMAL)
 
@@ -452,7 +456,7 @@ func _handle_horizontal_movement(grounded: bool, delta: float) -> Vector3:
 
 	var h_vel := Vector3(velocity.x, 0, velocity.z)
 	var top_speed := MAX_SPEED if _held("IN_Run") else WALK_SPEED
-	if not grounded:
+	if not grounded or dash_carry > 0.0:
 		top_speed = maxf(top_speed, h_vel.length())
 	var target_vel := direction.normalized() * top_speed
 
@@ -463,6 +467,11 @@ func _handle_horizontal_movement(grounded: bool, delta: float) -> Vector3:
 		rate = GROUND_ACCEL if grounded else AIR_ACCEL
 	else:
 		rate = GROUND_FRICTION if grounded else AIR_FRICTION
+
+	if dash_carry > 0.0:
+		dash_carry -= delta
+		if direction.length() <= 0.01:
+			rate = minf(rate, DASH_CARRY_FRICTION)
 
 	h_vel = h_vel.move_toward(target_vel, rate * delta)
 	velocity.x = h_vel.x
