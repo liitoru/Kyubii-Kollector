@@ -6,6 +6,7 @@ uniform float outline_width = 1.0;
 
 uniform sampler2D alpha_texture : source_color, filter_nearest;
 uniform float alpha_threshold : hint_range(0.0, 1.0) = 0.01;
+uniform float alpha_softness : hint_range(0.001, 0.5) = 0.1;
 
 void vertex() {
 	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
@@ -23,10 +24,16 @@ void fragment() {
 
 	float alpha = tex.a * outline_color.a;
 
-	if (alpha < alpha_threshold) {
+	float smooth_alpha = smoothstep(
+		alpha_threshold,
+		alpha_threshold + alpha_softness,
+		alpha
+	);
+
+	if (smooth_alpha <= 0.001) {
 		discard;
 	}
 
 	ALBEDO = outline_color.rgb;
-	ALPHA = alpha;
+	ALPHA = smooth_alpha;
 }

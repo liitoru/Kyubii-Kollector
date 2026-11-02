@@ -29,10 +29,12 @@ const COMBO_TIMES := [0.28, 0.28, 0.45]   # duration of each hit
 const COMBO_NAMES := ["Paw swipe 1", "Paw swipe 2", "Tail swipe"]
 const COMBO_LUNGE := 1.5                  # small step forward on each hit
 const ATTACK_FRICTION := 8.0              # how fast the lunge fades
+const COMBO_CHAIN_WINDOW := 0.35
 
 const COMBO_ANIM_NODES := ["Attack1", "Attack2", "TailSpin"]
 const AIR_SPIN_ANIM_NODE := "AirTailSpin"
 const ATTACK_ANIM_NODES := ["Attack1", "Attack2", "TailSpin", "AirTailSpin"]
+const ONESHOT_NODES := ["Attack1", "Attack2", "TailSpin", "AirTailSpin", "Jump", "DoubleJump", "Dash"]
 
 const AIR_SPIN_TIME := 0.5
 const AIR_SPIN_HOVER_VELOCITY := 0.5
@@ -95,7 +97,10 @@ var state: State = State.NORMAL
 var state_timer := 0.0
 var combo_step := 0
 var combo_queued := false
+var chain_step := -1
+var chain_timer := 0.0
 var air_dash_used := false
+var dash_entry_speed := 0.0
 var snappy_fall := false
 var snap_timer := 0.0
 var dash_dir := Vector3.FORWARD
@@ -145,6 +150,7 @@ func _physics_process(delta: float) -> void:
 	if grounded:
 		air_dash_used = false
 		snappy_fall = false
+	chain_timer = maxf(chain_timer - delta, 0.0) if grounded else 0.0
 
 	_tick_state(grounded, delta)
 	_handle_actions(grounded)
@@ -215,7 +221,7 @@ func _handle_actions(grounded: bool) -> void:
 		State.NORMAL:
 			if attack:
 				if grounded:
-					_start_combo_step(0)
+					_start_combo_step(chain_step + 1 if chain_timer > 0.0 else 0)
 				else:
 					_start_air_spin()
 			elif dash and not grounded and not air_dash_used:
@@ -244,6 +250,9 @@ func _tick_state(grounded: bool, delta: float) -> void:
 				if combo_queued and combo_step < COMBO_TIMES.size() - 1:
 					_start_combo_step(combo_step + 1)
 				else:
+					if combo_step < COMBO_TIMES.size() - 1:
+						chain_step = combo_step
+						chain_timer = COMBO_CHAIN_WINDOW
 					_set_state(State.NORMAL)
 		State.AIR_SPIN:
 			if grounded or state_timer <= 0.0:
@@ -258,6 +267,8 @@ func _set_state(new_state: State, duration := 0.0) -> void:
 		and state_timer > 0.0 and new_state != State.GROUND_COMBO
 	if cut_short:
 		_abort_attack_anims()
+	if state == State.AIR_DASH and state_timer > 0.0 and new_state != State.AIR_DASH:
+		character_anim_tree.set("parameters/Dash/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 
 	state = new_state
 	state_timer = duration
@@ -268,6 +279,9 @@ func _set_state(new_state: State, duration := 0.0) -> void:
 
 
 func _fire_oneshot(node_name: String) -> void:
+	for other in ONESHOT_NODES:
+		if other != node_name:
+			character_anim_tree.set("parameters/%s/request" % other, AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	character_anim_tree.set("parameters/%s/request" % node_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
@@ -284,6 +298,7 @@ func _start_snap_fall() -> void:
 func _start_combo_step(step: int) -> void:
 	combo_step = step
 	combo_queued = false
+	chain_timer = 0.0
 	_set_state(State.GROUND_COMBO, COMBO_TIMES[step])
 
 	# Face the stick direction (if any) and step into the hit
@@ -305,8 +320,8 @@ func _start_air_spin() -> void:
 
 func _bounce_off_enemy() -> void:
 	velocity.y = BOUNCE_VELOCITY
-	jumps_used = 1        
-	air_dash_used = false 
+	jumps_used = 1
+	air_dash_used = false
 	snappy_fall = false
 	_set_state(State.NORMAL)
 
@@ -314,18 +329,18 @@ func _bounce_off_enemy() -> void:
 func _start_air_dash() -> void:
 	var dir := _input_direction()
 	dash_dir = dir.normalized() if dir.length() > 0.01 else _facing_vector()
+	dash_entry_speed = Vector3(velocity.x, 0, velocity.z).length()
 	air_dash_used = true
 	velocity.y = 0.0
 	_set_state(State.AIR_DASH, DASH_TIME)
-	# TODO: dash animation / trail effect
+	_fire_oneshot("Dash")
+	# TODO: dash trail effect
 
 
 func _end_air_dash() -> void:
-	var h := Vector3(velocity.x, 0, velocity.z)
-	if h.length() > DASH_EXIT_SPEED:
-		h = h.normalized() * DASH_EXIT_SPEED
-	velocity.x = h.x
-	velocity.z = h.z
+	var exit_speed := maxf(DASH_EXIT_SPEED, dash_entry_speed)
+	velocity.x = dash_dir.x * exit_speed
+	velocity.z = dash_dir.z * exit_speed
 	_start_snap_fall()
 	_set_state(State.NORMAL)
 
@@ -408,7 +423,7 @@ func _handle_jump(grounded: bool, delta: float) -> void:
 			jumps_used += 1
 			_start_snap_fall()
 
-	if Input.is_action_just_released("ui_accept") and velocity.y > 0.0:
+	if Input.is_action_just_released("IN_Jump") and velocity.y > 0.0:
 		velocity.y *= JUMP_CUT
 
 
@@ -422,10 +437,10 @@ func _do_jump(jump_velocity: float) -> void:
 
 
 func _handle_horizontal_movement(grounded: bool, delta: float) -> Vector3:
-	# Airdash overrides movement completely
 	if state == State.AIR_DASH:
-		velocity.x = dash_dir.x * DASH_SPEED
-		velocity.z = dash_dir.z * DASH_SPEED
+		var dash_speed := maxf(DASH_SPEED, dash_entry_speed)
+		velocity.x = dash_dir.x * dash_speed
+		velocity.z = dash_dir.z * dash_speed
 		return Vector3(velocity.x, 0, velocity.z)
 
 	var direction := _input_direction()
@@ -435,9 +450,10 @@ func _handle_horizontal_movement(grounded: bool, delta: float) -> Vector3:
 	if attacking_on_ground:
 		direction = Vector3.ZERO
 
-	var top_speed := MAX_SPEED if _held("IN_Run") else WALK_SPEED
-
 	var h_vel := Vector3(velocity.x, 0, velocity.z)
+	var top_speed := MAX_SPEED if _held("IN_Run") else WALK_SPEED
+	if not grounded:
+		top_speed = maxf(top_speed, h_vel.length())
 	var target_vel := direction.normalized() * top_speed
 
 	var rate: float

@@ -1,13 +1,26 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://dgm8otrqkcn7v"]
 
 [ext_resource type="Texture2D" uid="uid://pnkgwwlh7v1g" path="res://Models/Haruto/textures/fop textures.png" id="1_vrb15"]
+[ext_resource type="Shader" uid="uid://2raam606joc8" path="res://Shader/OUTALPHA.gdshader" id="2_6epxm"]
+[ext_resource type="Texture2D" uid="uid://c7k50kvgpvsl2" path="res://Models/Haruto/Haruto_fop textures.png" id="3_p2i43"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_poiit"]
+render_priority = 0
+shader = ExtResource("2_6epxm")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 2.0
+shader_parameter/alpha_texture = ExtResource("3_p2i43")
+shader_parameter/alpha_threshold = 0.01
+shader_parameter/alpha_softness = 0.1
 
 [resource]
 resource_name = "Body"
+next_pass = SubResource("ShaderMaterial_poiit")
 transparency = 4
 cull_mode = 2
 shading_mode = 0
 albedo_texture = ExtResource("1_vrb15")
 texture_filter = 0
 stencil_mode = 3
+stencil_flags = 2
 stencil_outline_thickness = 0.005
