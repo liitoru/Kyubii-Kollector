@@ -263,24 +263,25 @@ debug_shape_custom_color = Color(0.81724805, 0, 0.1565935, 1)
 transform = Transform3D(-1, 0, -1.1920929e-07, 0, 1, 0, 1.1920929e-07, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="CharacterPivot/MainCharacter/Armature" parent_id_path=PackedInt32Array(1332030482, 1703979466) index="0" unique_id=639580386]
-bones/2/position = Vector3(-0.01212684, 0.25202242, -0.16457547)
-bones/2/rotation = Quaternion(0.7557259, 0.0386058, -0.0447374, 0.6522167)
-bones/3/rotation = Quaternion(0.5495388, 0.09594949, -0.021319821, 0.8296664)
-bones/5/rotation = Quaternion(-0.7985681, 0.012877311, -0.06364335, 0.5983918)
-bones/6/rotation = Quaternion(0.5641971, 0.0052045733, 0.08793436, 0.82092756)
-bones/8/rotation = Quaternion(-0.7985681, -0.012877293, 0.06364335, 0.5983918)
-bones/9/rotation = Quaternion(0.16692926, 0.01829692, 0.056187086, 0.98419654)
-bones/11/rotation = Quaternion(0.7609905, -0.010132722, 0.009402441, 0.6486159)
-bones/12/rotation = Quaternion(-0.36079648, -0.17620668, -0.06323796, 0.91366196)
-bones/13/rotation = Quaternion(0.7609905, 0.010135047, -0.009405206, 0.64861584)
-bones/14/rotation = Quaternion(-0.36079648, 0.17620657, 0.063238, 0.9136619)
-bones/16/rotation = Quaternion(-0.18439992, -0.006224507, -0.011207295, 0.9827677)
-bones/32/rotation = Quaternion(0.9471355, 0.048718244, 0.08705455, 0.3049302)
-bones/33/rotation = Quaternion(0.055890966, 0.0074262484, -0.13150334, 0.98971105)
-bones/34/rotation = Quaternion(0.17188372, 0.0228383, -0.1297178, 0.9762724)
-bones/35/rotation = Quaternion(0.13641459, 0.0181255, -0.13045982, 0.9818569)
+bones/2/position = Vector3(0.013705322, 0.2508556, -0.16457547)
+bones/2/rotation = Quaternion(0.75536114, -0.043606203, 0.050522, 0.6519015)
+bones/3/rotation = Quaternion(0.56969464, -0.010007332, -0.09059916, 0.8167863)
+bones/5/rotation = Quaternion(-0.80273247, 0.013556415, -0.061266452, 0.593029)
+bones/6/rotation = Quaternion(0.5496848, -0.10404538, 0.015532856, 0.8287219)
+bones/8/rotation = Quaternion(-0.80273235, -0.013556402, 0.061266467, 0.59302896)
+bones/9/rotation = Quaternion(0.16684808, -0.020661268, -0.06345999, 0.9837213)
+bones/11/rotation = Quaternion(0.76099896, -0.010132844, 0.009402307, 0.6486058)
+bones/12/rotation = Quaternion(-0.36419782, -0.17634517, -0.06254939, 0.9123322)
+bones/13/rotation = Quaternion(0.76099896, 0.010135172, -0.009405073, 0.6486059)
+bones/14/rotation = Quaternion(-0.3641978, 0.17634502, 0.06254943, 0.9123322)
+bones/16/rotation = Quaternion(-0.18441148, -0.006641712, -0.012071948, 0.98275256)
+bones/32/rotation = Quaternion(0.95427436, 0.035895787, 0.052190617, 0.29214406)
+bones/33/rotation = Quaternion(0.05535078, 0.01073505, -0.19009526, 0.9801454)
+bones/34/rotation = Quaternion(0.17022249, 0.033013996, -0.18751413, 0.96683663)
+bones/35/rotation = Quaternion(0.13509612, 0.026201386, -0.1885867, 0.97236705)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="CharacterPivot/MainCharacter/Armature/Skeleton3D" index="1" unique_id=46091195]
+visible = false
 bone_name = "BackLeg3.R"
 bone_idx = 8
 
@@ -291,6 +292,7 @@ width_curve = SubResource("Curve_ks21f")
 color = Color(1, 1, 1, 0.30980393)
 
 [node name="BoneAttachment3D2" type="BoneAttachment3D" parent="CharacterPivot/MainCharacter/Armature/Skeleton3D" index="2" unique_id=1481452145]
+visible = false
 bone_name = "BackLeg3.L"
 bone_idx = 5
 

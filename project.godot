@@ -54,6 +54,7 @@ folder_colors={
 [global_group]
 
 Player=""
+MusicManager="For music managment!"
 
 [gui]
 

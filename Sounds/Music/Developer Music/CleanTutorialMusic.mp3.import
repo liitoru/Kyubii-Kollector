@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://sgqqbp6sl8uh"
+path="res://.godot/imported/CleanTutorialMusic.mp3-442b9d55a29af46c275749e9546b9ed4.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Music/Developer Music/CleanTutorialMusic.mp3"
+dest_files=["res://.godot/imported/CleanTutorialMusic.mp3-442b9d55a29af46c275749e9546b9ed4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c0wff0ykqxvr"
+path="res://.godot/imported/Piano_SafeCv2.mp3-baa536bb7a169c239af360a0959f4430.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Music/Developer Music/Piano_SafeCv2.mp3"
+dest_files=["res://.godot/imported/Piano_SafeCv2.mp3-baa536bb7a169c239af360a0959f4430.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

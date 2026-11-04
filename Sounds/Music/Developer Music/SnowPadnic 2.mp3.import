@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://deeycqooqo2q1"
+path="res://.godot/imported/SnowPadnic 2.mp3-15a9c1b5ef51ea9486edd698d07c008a.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Music/Developer Music/SnowPadnic 2.mp3"
+dest_files=["res://.godot/imported/SnowPadnic 2.mp3-15a9c1b5ef51ea9486edd698d07c008a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

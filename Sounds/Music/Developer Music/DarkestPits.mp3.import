@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dfk6nsrxjrepl"
+path="res://.godot/imported/DarkestPits.mp3-cbf423c471691adbc498f7e36a4a37c1.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Music/Developer Music/DarkestPits.mp3"
+dest_files=["res://.godot/imported/DarkestPits.mp3-cbf423c471691adbc498f7e36a4a37c1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

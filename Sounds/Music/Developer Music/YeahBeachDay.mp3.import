@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dk1mux2np0g5r"
+path="res://.godot/imported/YeahBeachDay.mp3-12811d01d70c6bb9969fe457eb827a73.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Music/Developer Music/YeahBeachDay.mp3"
+dest_files=["res://.godot/imported/YeahBeachDay.mp3-12811d01d70c6bb9969fe457eb827a73.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

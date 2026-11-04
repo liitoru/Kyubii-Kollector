@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://85cu5rjflyox"
+path="res://.godot/imported/Unammed_1.mp3-b7162e2a6e433958a32bfc09e813d122.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Music/Developer Music/Unammed_1.mp3"
+dest_files=["res://.godot/imported/Unammed_1.mp3-b7162e2a6e433958a32bfc09e813d122.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d2v7vlvnjdlhj"
+path="res://.godot/imported/Old_SafeC2.mp3-0184548a2c09325521897bb70f6ceb98.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Music/Developer Music/Old_SafeC2.mp3"
+dest_files=["res://.godot/imported/Old_SafeC2.mp3-0184548a2c09325521897bb70f6ceb98.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
