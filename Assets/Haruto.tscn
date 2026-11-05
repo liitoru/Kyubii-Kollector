@@ -76,7 +76,6 @@ triangles = PackedInt32Array(0, 1, 2, 1, 2, 3)
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_h86mf"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dq2n5"]
-graph_offset = Vector2(-609.45715, 309.08466)
 nodes/output/position = Vector2(3060, 180)
 nodes/Movement/node = SubResource("AnimationNodeBlendSpace2D_rda8d")
 nodes/Movement/position = Vector2(-560, 100)
@@ -262,23 +261,23 @@ debug_shape_custom_color = Color(0.81724805, 0, 0.1565935, 1)
 [node name="MainCharacter" parent="CharacterPivot" unique_id=1332030482 instance=ExtResource("3_ltdcu")]
 transform = Transform3D(-1, 0, -1.1920929e-07, 0, 1, 0, 1.1920929e-07, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="CharacterPivot/MainCharacter/Armature" parent_id_path=PackedInt32Array(1332030482, 1703979466) index="0" unique_id=639580386]
-bones/2/position = Vector3(0.013705322, 0.2508556, -0.16457547)
-bones/2/rotation = Quaternion(0.75536114, -0.043606203, 0.050522, 0.6519015)
-bones/3/rotation = Quaternion(0.56969464, -0.010007332, -0.09059916, 0.8167863)
-bones/5/rotation = Quaternion(-0.80273247, 0.013556415, -0.061266452, 0.593029)
-bones/6/rotation = Quaternion(0.5496848, -0.10404538, 0.015532856, 0.8287219)
-bones/8/rotation = Quaternion(-0.80273235, -0.013556402, 0.061266467, 0.59302896)
-bones/9/rotation = Quaternion(0.16684808, -0.020661268, -0.06345999, 0.9837213)
-bones/11/rotation = Quaternion(0.76099896, -0.010132844, 0.009402307, 0.6486058)
-bones/12/rotation = Quaternion(-0.36419782, -0.17634517, -0.06254939, 0.9123322)
-bones/13/rotation = Quaternion(0.76099896, 0.010135172, -0.009405073, 0.6486059)
-bones/14/rotation = Quaternion(-0.3641978, 0.17634502, 0.06254943, 0.9123322)
-bones/16/rotation = Quaternion(-0.18441148, -0.006641712, -0.012071948, 0.98275256)
-bones/32/rotation = Quaternion(0.95427436, 0.035895787, 0.052190617, 0.29214406)
-bones/33/rotation = Quaternion(0.05535078, 0.01073505, -0.19009526, 0.9801454)
-bones/34/rotation = Quaternion(0.17022249, 0.033013996, -0.18751413, 0.96683663)
-bones/35/rotation = Quaternion(0.13509612, 0.026201386, -0.1885867, 0.97236705)
+[node name="Skeleton3D" parent="CharacterPivot/MainCharacter/Armature" parent_id_path=PackedInt32Array(1332030482, 1842441465) index="0" unique_id=1583444084]
+bones/2/position = Vector3(-0.023093102, 0.24175844, -0.16457547)
+bones/2/rotation = Quaternion(0.7523141, 0.07295391, -0.084536664, 0.6492725)
+bones/3/rotation = Quaternion(0.5495177, 0.1548579, 0.021709258, 0.82071793)
+bones/5/rotation = Quaternion(-0.834068, 0.018880924, -0.04243197, 0.5497032)
+bones/6/rotation = Quaternion(0.6031359, 0.039661266, 0.10681869, 0.78945804)
+bones/8/rotation = Quaternion(-0.8340681, -0.018880902, 0.04243197, 0.5497031)
+bones/9/rotation = Quaternion(0.1661759, 0.034573615, 0.10617551, 0.97975355)
+bones/11/rotation = Quaternion(0.76004755, -0.010119049, 0.009417149, 0.6497204)
+bones/12/rotation = Quaternion(-0.39081064, -0.17735031, -0.05709576, 0.9014178)
+bones/13/rotation = Quaternion(0.76001185, 0.010120862, -0.0094204685, 0.64976215)
+bones/14/rotation = Quaternion(-0.39081073, 0.17735021, 0.057095814, 0.90141785)
+bones/16/rotation = Quaternion(-0.18453059, -0.0020735913, -0.0037331434, 0.9828176)
+bones/33/rotation = Quaternion(0.95854735, 0.035359997, 0.041709647, 0.27963725)
+bones/34/rotation = Quaternion(0.05636652, -0.0013288707, 0.023531606, 0.99813193)
+bones/35/rotation = Quaternion(0.17334619, -0.0040867217, 0.023212014, 0.98457897)
+bones/36/rotation = Quaternion(0.13757522, -0.0032434266, 0.023344796, 0.99021083)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="CharacterPivot/MainCharacter/Armature/Skeleton3D" index="1" unique_id=46091195]
 visible = false
@@ -305,7 +304,7 @@ color = Color(1, 1, 1, 0.30980393)
 [node name="CharacterAnimTree" type="AnimationTree" parent="CharacterPivot/MainCharacter" unique_id=126775959]
 tree_root = SubResource("AnimationNodeBlendTree_dq2n5")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Movement/blend_position = Vector2(0, 0)
+parameters/Movement/blend_position = Vector2(-0.000903368, 0.050228357)
 parameters/Movement/observer = null
 parameters/Defeated/active = false
 parameters/Defeated/internal_active = false
@@ -354,6 +353,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="DEBUGLABEL" type="Label3D" parent="." unique_id=1425494622]
 transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0.9213211, 0)
+visible = false
 billboard = 1
 text = "TEST"
 
