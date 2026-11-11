@@ -1,0 +1,207 @@
+[gd_scene format=3 uid="uid://dfl7e0iv7rt5a"]
+
+[ext_resource type="Texture2D" uid="uid://dam0xe7k0lve4" path="res://Globals/ui/image.png" id="1_i26rj"]
+[ext_resource type="FontFile" uid="uid://depl877o37yx7" path="res://Fonts/AlteHaasGroteskBold.ttf" id="2_eiy7p"]
+[ext_resource type="FontFile" uid="uid://142sl4p7upvk" path="res://Fonts/Sunny Spells Basic.ttf" id="3_h7a2f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqjrg"]
+bg_color = Color(0.9567508, 0.58067715, 0.42477766, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7r1g0"]
+bg_color = Color(0.5398667, 0.41946703, 0.25599796, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7a2f"]
+bg_color = Color(0.70750314, 0.57913774, 0.3578578, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qoqlk"]
+bg_color = Color(0.7258576, 0.5969388, 0.36980978, 1)
+border_width_left = 10
+border_color = Color(0.5781952, 0.46784735, 0.26939994, 1)
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eiy7p"]
+bg_color = Color(0.70750314, 0.57913774, 0.3578578, 1)
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwfq2"]
+bg_color = Color(0.70750314, 0.57913774, 0.3578578, 1)
+
+[sub_resource type="Theme" id="Theme_i26rj"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 36
+Button/fonts/font = ExtResource("2_eiy7p")
+Button/styles/focus = SubResource("StyleBoxFlat_h7a2f")
+Button/styles/hover = SubResource("StyleBoxFlat_qoqlk")
+Button/styles/normal = SubResource("StyleBoxFlat_eiy7p")
+Button/styles/pressed = SubResource("StyleBoxFlat_iwfq2")
+
+[node name="Control" type="Control" unique_id=1777776382]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=353605189]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackgroundImage" type="TextureRect" parent="." unique_id=438584667]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 330.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_i26rj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LevelSelect" type="ColorRect" parent="." unique_id=770690713]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3298611
+anchor_right = 1.0003403
+anchor_bottom = 1.0
+offset_right = -0.39208984
+color = Color(0.87058824, 0.7411765, 0.57254905, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelSelect" unique_id=1860139672]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.077148154
+offset_bottom = 0.0079956055
+theme_override_fonts/normal_font = ExtResource("3_h7a2f")
+bbcode_enabled = true
+text = "[center]Level Select"
+fit_content = true
+resize_font_to_fit = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Levels" type="ScrollContainer" parent="LevelSelect" unique_id=796839903]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.010362694
+anchor_top = 0.061728396
+anchor_right = 0.9857513
+anchor_bottom = 0.9830247
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelect/Levels" unique_id=1613237755]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="LevelSelect/Levels/VBoxContainer" unique_id=1084937067]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="LevelSelect/Levels/VBoxContainer" unique_id=1322800287]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cqjrg")
+
+[node name="LVLP" type="Panel" parent="LevelSelect/Levels/VBoxContainer/Panel" unique_id=229567733]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7r1g0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelSelect/Levels/VBoxContainer/Panel" unique_id=1148539195]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 152.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center] Level Name Here"
+
+[node name="Holder" type="ColorRect" parent="." unique_id=1861852627]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.33
+anchor_bottom = 1.0
+offset_right = -46.160004
+color = Color(0.83137256, 0.39607844, 0.2, 1)
+
+[node name="Play" type="Button" parent="Holder" unique_id=1886351286]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5632716
+anchor_right = 0.9258527
+anchor_bottom = 0.6540494
+offset_right = 0.1759491
+offset_bottom = 0.17599487
+theme = SubResource("Theme_i26rj")
+text = "Play
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Settings" type="Button" parent="Holder" unique_id=1046934556]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.6728395
+anchor_right = 0.86835796
+anchor_bottom = 0.76356786
+offset_right = 0.023986816
+offset_bottom = 0.20806885
+theme = SubResource("Theme_i26rj")
+text = "Settings
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Quit" type="Button" parent="Holder" unique_id=1984563151]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.7836296
+anchor_right = 0.7950148
+anchor_bottom = 0.8766062
+offset_top = 0.20800781
+offset_right = -0.025260925
+offset_bottom = -0.04083252
+theme = SubResource("Theme_i26rj")
+text = "Quit
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Holder" unique_id=1935412575]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.14197531
+anchor_right = 1.0
+anchor_bottom = 0.37344444
+offset_bottom = 0.0079956055
+theme_override_fonts/normal_font = ExtResource("3_h7a2f")
+bbcode_enabled = true
+text = "[center]KYUBII
+COLLECTOR
+[wip]"
+fit_content = true
+resize_font_to_fit = true
+metadata/_edit_use_anchors_ = true
