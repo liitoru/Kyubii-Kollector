@@ -1,0 +1,233 @@
+[gd_scene format=3 uid="uid://i5rtloregjl5"]
+
+[ext_resource type="FontFile" uid="uid://depl877o37yx7" path="res://Fonts/AlteHaasGroteskBold.ttf" id="1_udhen"]
+[ext_resource type="Texture2D" uid="uid://byit0t84tlrgp" path="res://Globals/ui/HeartFrames/Full/00.png" id="2_0p6nl"]
+[ext_resource type="Texture2D" uid="uid://df8um4rt0oayg" path="res://Globals/ui/HeartFrames/Full/01.png" id="3_ml4w0"]
+[ext_resource type="Texture2D" uid="uid://d0fsoq1iy6m2b" path="res://Globals/ui/HeartFrames/Full/02.png" id="4_3d3s7"]
+[ext_resource type="Texture2D" uid="uid://cu26w1v2t8v30" path="res://Globals/ui/HeartFrames/Full/03.png" id="5_tsbup"]
+[ext_resource type="Texture2D" uid="uid://3erg4pm2kdcr" path="res://Globals/ui/HeartFrames/Full/04.png" id="6_a8qs4"]
+[ext_resource type="Texture2D" uid="uid://cgvxxcoghq2er" path="res://Globals/ui/HeartFrames/Full/05.png" id="7_frnjl"]
+[ext_resource type="Texture2D" uid="uid://bnflrxd03luwv" path="res://Globals/ui/HeartFrames/Full/06.png" id="8_te7ex"]
+[ext_resource type="Texture2D" uid="uid://ialftgi48nja" path="res://Globals/ui/HeartFrames/Full/07.png" id="9_lc58g"]
+[ext_resource type="Texture2D" uid="uid://boje5j5aewjoo" path="res://Globals/ui/HeartFrames/Full/08.png" id="10_nwmgj"]
+[ext_resource type="Texture2D" uid="uid://dcfiplrf02jwj" path="res://Globals/ui/HeartFrames/Full/09.png" id="11_37204"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_udhen"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af4f6"]
+bg_color = Color(0.93356013, 0.79481024, 0.6536989, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvumt"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_weky4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weky4"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_wb5mu"]
+frames = 10
+speed_scale = 25.0
+frame_0/texture = ExtResource("2_0p6nl")
+frame_1/texture = ExtResource("3_ml4w0")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("4_3d3s7")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("5_tsbup")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("6_a8qs4")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("7_frnjl")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("8_te7ex")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("9_lc58g")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("10_nwmgj")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("11_37204")
+frame_9/duration = 1.0
+
+[node name="Control" type="Control" unique_id=1525646042]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LowerBar" type="Panel" parent="." unique_id=140740343]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.6944444
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_udhen")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="LowerBar" unique_id=373493744]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.033854168
+anchor_right = 0.9661458
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_af4f6")
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LowerBar/Panel" unique_id=8270964]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 8.0
+offset_right = -13.0
+offset_bottom = -5.0000305
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_udhen")
+bbcode_enabled = true
+text = "well i guess i forgot to finish this part although the font is too big unless much text appears still it is too big i have to fix this
+i hope no one see this "
+fit_content = true
+resize_font_to_fit = true
+maximum_font_size = 30
+
+[node name="NameBar" type="Panel" parent="LowerBar" unique_id=1905319028]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048611112
+anchor_top = -0.181818
+anchor_right = 0.28038195
+anchor_bottom = 0.005050851
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dvumt")
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LowerBar/NameBar" unique_id=246497260]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = -1.0000381
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_udhen")
+bbcode_enabled = true
+text = "[center]CHARACTER NAME HERE!
+color should change"
+fit_content = true
+resize_font_to_fit = true
+
+[node name="TopBarUI" type="Panel" parent="." unique_id=968407891]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.22530864
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_weky4")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="TopBarUI" unique_id=1567490926]
+visible = false
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5434028
+anchor_bottom = 0.77397263
+offset_left = 7.0
+offset_top = 6.0
+offset_right = -303.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_weky4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopBarUI/Panel" unique_id=804471632]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 0.9999924
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Heart" type="TextureRect" parent="TopBarUI/Panel/HBoxContainer" unique_id=1336508203]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AnimatedTexture_wb5mu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart2" type="TextureRect" parent="TopBarUI/Panel/HBoxContainer" unique_id=1028380970]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AnimatedTexture_wb5mu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart3" type="TextureRect" parent="TopBarUI/Panel/HBoxContainer" unique_id=774589057]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AnimatedTexture_wb5mu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart4" type="TextureRect" parent="TopBarUI/Panel/HBoxContainer" unique_id=657773081]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AnimatedTexture_wb5mu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart5" type="TextureRect" parent="TopBarUI/Panel/HBoxContainer" unique_id=446864794]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AnimatedTexture_wb5mu")
+expand_mode = 1
+stretch_mode = 5
