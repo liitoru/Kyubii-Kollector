@@ -200,7 +200,7 @@ offset_bottom = 0.0079956055
 theme_override_fonts/normal_font = ExtResource("3_h7a2f")
 bbcode_enabled = true
 text = "[center]KYUBII
-COLLECTOR
+KOLLECTOR
 [wip]"
 fit_content = true
 resize_font_to_fit = true
