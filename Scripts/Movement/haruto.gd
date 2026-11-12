@@ -70,6 +70,10 @@ const LOOK_SMOOTH := 8.0
 const LOOK_FRONT_ANGLE := 80.0
 const LOOK_HEIGHT := 1.5
 
+##Gamepad
+const STICK_CAM_SPEED := 3.0   # radians/sec at full stick tilt
+const STICK_DEADZONE := 0.2
+
 const BLINK_SHAPE := "Blink"
 const BLINK_MIN_WAIT := 2.0
 const BLINK_MAX_WAIT := 5.0
@@ -131,6 +135,7 @@ var form: Form = Form.BASE
 
 
 func _ready() -> void:
+	_setup_gamepad_inputs()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera_arm.top_level = true
 	camera_arm.add_excluded_object(self)
@@ -146,13 +151,15 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+
+	if event is InputEventKey and event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	if event is InputEventMouseMotion:
-		_rotate_camera(event.relative)
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		_rotate_camera(event.relative * Sensitivity)
 
 
 func _physics_process(delta: float) -> void:
+	_update_stick_camera(delta)
 	_update_camera_position(delta)
 	_snap_character_to_ground()
 
@@ -181,6 +188,49 @@ func _physics_process(delta: float) -> void:
 
 
 
+func _setup_gamepad_inputs() -> void:
+	_bind_axis("IN_Left", JOY_AXIS_LEFT_X, -1.0)
+	_bind_axis("IN_Right", JOY_AXIS_LEFT_X, 1.0)
+	_bind_axis("IN_Forward", JOY_AXIS_LEFT_Y, -1.0)
+	_bind_axis("IN_Backward", JOY_AXIS_LEFT_Y, 1.0)
+	_bind_axis("CAM_Left", JOY_AXIS_RIGHT_X, -1.0)
+	_bind_axis("CAM_Right", JOY_AXIS_RIGHT_X, 1.0)
+	_bind_axis("CAM_Up", JOY_AXIS_RIGHT_Y, -1.0)
+	_bind_axis("CAM_Down", JOY_AXIS_RIGHT_Y, 1.0)
+
+	_bind_button("IN_Jump", JOY_BUTTON_A)
+	_bind_button("IN_Attack", JOY_BUTTON_X)
+	_bind_button("IN_Dash", JOY_BUTTON_B)
+	_bind_button("IN_Transform", JOY_BUTTON_Y)
+	_bind_button("IN_Run", JOY_BUTTON_RIGHT_SHOULDER)
+
+
+func _ensure_action(action: StringName) -> void:
+	if not InputMap.has_action(action):
+		InputMap.add_action(action, STICK_DEADZONE)
+
+
+func _bind_axis(action: StringName, axis: JoyAxis, sign_value: float) -> void:
+	_ensure_action(action)
+	for e in InputMap.action_get_events(action):
+		if e is InputEventJoypadMotion and e.axis == axis and signf(e.axis_value) == sign_value:
+			return
+	var ev := InputEventJoypadMotion.new()
+	ev.axis = axis
+	ev.axis_value = sign_value
+	InputMap.action_add_event(action, ev)
+
+
+func _bind_button(action: StringName, button: JoyButton) -> void:
+	_ensure_action(action)
+	for e in InputMap.action_get_events(action):
+		if e is InputEventJoypadButton and e.button_index == button:
+			return
+	var ev := InputEventJoypadButton.new()
+	ev.button_index = button
+	InputMap.action_add_event(action, ev)
+
+
 func _pressed(action: StringName) -> bool:
 	return InputMap.has_action(action) and Input.is_action_just_pressed(action)
 
@@ -202,10 +252,17 @@ func _facing_vector() -> Vector3:
 
 # Camera
 
-func _rotate_camera(relative: Vector2) -> void:
-	camera_arm.rotation.y -= relative.x * Sensitivity
-	camera_arm.rotation.x -= relative.y * Sensitivity
+# amount is in radians (x = yaw, y = pitch), for both mouse and stick
+func _rotate_camera(amount: Vector2) -> void:
+	camera_arm.rotation.y -= amount.x
+	camera_arm.rotation.x -= amount.y
 	camera_arm.rotation.x = clampf(camera_arm.rotation.x, deg_to_rad(PITCH_MIN), deg_to_rad(PITCH_MAX))
+
+
+func _update_stick_camera(delta: float) -> void:
+	var look := Input.get_vector("CAM_Left", "CAM_Right", "CAM_Up", "CAM_Down")
+	if look.length() > 0.0:
+		_rotate_camera(look * STICK_CAM_SPEED * delta)
 
 
 func _update_camera_position(delta: float) -> void:

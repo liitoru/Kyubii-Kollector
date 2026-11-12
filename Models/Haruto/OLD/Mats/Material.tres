@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://dtmf6sikd5p66"]
 
-[ext_resource type="Texture2D" uid="uid://bp8u2yddrikrx" path="res://Models/Haruto/Material_BaseColor.png" id="1_vecmk"]
+[ext_resource type="Texture2D" uid="uid://bp8u2yddrikrx" path="res://Models/Haruto/OLD/Material_BaseColor.png" id="1_vecmk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rguq"]
 render_priority = 1
