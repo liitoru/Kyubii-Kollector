@@ -1,5 +1,5 @@
 extends Area3D
-
+##OLD CODE UNUSED SINCE PLUGIN IS IN FOR THIS
 @export var CanCreate : bool = true
 @export var Music : AudioStream
 @export var WorldRoot : NodePath
