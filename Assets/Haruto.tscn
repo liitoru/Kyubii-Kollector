@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cpqq3pfd1vb1k" path="res://Models/Dev/MAin/MainCharacter.gltf" id="2_ck2nw"]
 [ext_resource type="PackedScene" uid="uid://i5rtloregjl5" path="res://Assets/UserUI.tscn" id="2_ks21f"]
 [ext_resource type="PackedScene" uid="uid://cpjq0nkf3ln3p" path="res://Models/Haruto/Haruto.glb" id="3_ltdcu"]
+[ext_resource type="Script" uid="uid://djrxjgsuthd1u" path="res://Scripts/Movement/HarutoFakeShadow.gd" id="5_0u1t6"]
 
 [sub_resource type="Curve" id="Curve_ks21f"]
 _data = [Vector2(0, 0.13392854), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.13392854), 0.0, 0.0, 0, 0, Vector2(0.50508475, 0.50892854), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -120,6 +121,21 @@ height = 0.73254395
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_5xygc"]
 slide_on_slope = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0u1t6"]
+resource_local_to_scene = false
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xx255"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_0u1t6")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0u1t6"]
+material = SubResource("StandardMaterial3D_xx255")
 
 [node name="Haruto" type="CharacterBody3D" unique_id=210350189 node_paths=PackedStringArray("face_mesh") groups=["Player"]]
 script = ExtResource("1_a6hqk")
@@ -265,22 +281,25 @@ debug_shape_custom_color = Color(0.81724805, 0, 0.1565935, 1)
 transform = Transform3D(-1, 0, -1.1920929e-07, 0, 1, 0, 1.1920929e-07, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="CharacterPivot/MainCharacter/Armature" parent_id_path=PackedInt32Array(1332030482, 1842441465) index="0" unique_id=1583444084]
-bones/2/position = Vector3(0.026452037, 0.23745887, -0.16457547)
-bones/2/rotation = Quaternion(0.75083625, -0.08353553, 0.096788324, 0.64799595)
-bones/3/rotation = Quaternion(0.6196512, -0.048984624, -0.11130747, 0.7753991)
-bones/5/rotation = Quaternion(-0.84800667, 0.021388855, -0.03343657, 0.52849716)
-bones/6/rotation = Quaternion(0.5489099, -0.17460527, -0.03657236, 0.8166232)
-bones/8/rotation = Quaternion(-0.8480067, -0.02138885, 0.033436563, 0.5284972)
-bones/9/rotation = Quaternion(0.16584828, -0.039582763, -0.1215711, 0.9778282)
-bones/11/rotation = Quaternion(0.7595871, -0.010112372, 0.009424319, 0.65025866)
-bones/12/rotation = Quaternion(-0.40334752, -0.1777749, -0.054485396, 0.8959567)
-bones/13/rotation = Quaternion(0.75958693, 0.010114705, -0.009427079, 0.6502588)
-bones/14/rotation = Quaternion(-0.40334755, 0.17777479, 0.05448545, 0.8959567)
-bones/16/rotation = Quaternion(-0.18482232, 0.0019198859, 0.002670247, 0.98276645)
-bones/33/rotation = Quaternion(0.9633276, 0.014464568, -0.008540759, 0.26780206)
-bones/34/rotation = Quaternion(0.056347746, 0.0019709615, -0.03490173, 0.99779904)
-bones/35/rotation = Quaternion(0.17328842, 0.00606139, -0.03442785, 0.98425055)
-bones/36/rotation = Quaternion(0.13752939, 0.0048105987, -0.03462478, 0.9898806)
+bones/2/position = Vector3(0.010957119, 0.25288692, -0.16457547)
+bones/2/rotation = Quaternion(0.7559736, -0.03481656, 0.040337402, 0.65242994)
+bones/3/rotation = Quaternion(0.5607317, -0.001471228, -0.08580513, 0.82353824)
+bones/5/rotation = Quaternion(-0.7956037, 0.012397577, -0.06531901, 0.6021582)
+bones/6/rotation = Quaternion(0.54940104, -0.08987656, 0.02561456, 0.830316)
+bones/8/rotation = Quaternion(-0.79560375, -0.012397558, 0.06531902, 0.6021582)
+bones/9/rotation = Quaternion(0.16698344, -0.016496077, -0.05066802, 0.9845188)
+bones/11/rotation = Quaternion(0.7610364, -0.0101333875, 0.009401722, 0.64856195)
+bones/12/rotation = Quaternion(-0.3583923, -0.17610745, -0.06372355, 0.91459304)
+bones/13/rotation = Quaternion(0.7610364, 0.010135714, -0.009404488, 0.64856195)
+bones/14/rotation = Quaternion(-0.35839227, 0.17610739, 0.063723594, 0.9145931)
+bones/16/rotation = Quaternion(-0.18505885, 0.0074497256, 0.012193362, 0.9826236)
+bones/33/rotation = Quaternion(0.9403299, 0.048586074, 0.08508065, 0.32585317)
+bones/34/rotation = Quaternion(0.05513588, -0.011789342, 0.20876448, 0.97633934)
+bones/35/rotation = Quaternion(0.1695615, -0.036256306, 0.20592974, 0.9630822)
+bones/36/rotation = Quaternion(0.13457155, -0.028774662, 0.20710774, 0.9685912)
+
+[node name="Body" parent="CharacterPivot/MainCharacter/Armature/Skeleton3D" index="0" unique_id=333174022]
+cast_shadow = 0
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="CharacterPivot/MainCharacter/Armature/Skeleton3D" index="1" unique_id=46091195]
 visible = false
@@ -359,6 +378,22 @@ transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0.9213211, 0)
 visible = false
 billboard = 1
 text = "TEST"
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=173887703]
+transparent_bg = true
+size = Vector2i(1020, 1020)
+
+[node name="Projected" type="Camera3D" parent="SubViewport" unique_id=6412070]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 1.3342073, 0)
+
+[node name="FakeShadowRay" type="RayCast3D" parent="." unique_id=150477278]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -0.0040022135)
+target_position = Vector3(0, -10, 0)
+
+[node name="FakeShadow" type="MeshInstance3D" parent="." unique_id=1952003318]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -0.0040022135)
+mesh = SubResource("PlaneMesh_0u1t6")
+script = ExtResource("5_0u1t6")
 
 [editable path="OLDMainCharacter"]
 [editable path="CharacterPivot/MainCharacter"]
